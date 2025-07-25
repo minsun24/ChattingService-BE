@@ -5,6 +5,11 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# 보안 설정 파일 무시
+secret.properties
+*.secret.yml
+application-secret.yml
+
 ### STS ###
 .apt_generated
 .classpath

@@ -7,5 +7,6 @@ public class MemberService {
 
     // 회원 가입
     public Member signUp(SignUpRequest signUpRequest) {
+        return Member.builder().build();
     }
 }
