@@ -1,1 +1,27 @@
-spring.application.name=chatserver
+server:
+  port: 5000
+
+spring:
+  application:
+    name: chat-practice
+  config:
+    import: classpath:secret.properties
+
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/chatdb?useSSL=false # 443 통신하지 않겠다.(인증서 기반 보안 통신 X)
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+
+  jpa:
+    # database: ? -> Spring Boot는 jdbc url에서 자동으로 데이터베이스 종류를 감지할 수 있기 때문에 database는 생략해도 됨.
+    # InnoDB 설정: 트랜잭션을 지원하는 DB 엔진 (일반적인 웹 서비스 개발 시 사용)
+    # 참고: MyISAM은 트랜잭션 미지원, 조회 성능 위주
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+#      ddl-auto: update # DB 구조 자동 반영 (ex: ALTER)
+    show-sql: true    # hibernate에 의해 자동 생성되는 로우 쿼리문이 출력됨.

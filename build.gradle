@@ -24,9 +24,11 @@ repositories {
 }
 
 dependencies {
+    // jpa : 데이터베이스와 연동 목적 & 로우 쿼리 대신 자동 쿼리 생성(ORM)
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+    // SECURITY는 로그인 개발 후  추가
+//    implementation 'org.springframework.boot:spring-boot-starter-security' 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     compileOnly 'org.projectlombok:lombok'
