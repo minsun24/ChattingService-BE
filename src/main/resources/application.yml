@@ -22,6 +22,6 @@ spring:
     database-platform: org.hibernate.dialect.MariaDBDialect
     generate-ddl: true
     hibernate:
-      ddl-auto: create
-#      ddl-auto: update # DB 구조 자동 반영 (ex: ALTER)
+#      ddl-auto: create
+      ddl-auto: update # DB 구조 자동 반영 (ex: ALTER)
     show-sql: true    # hibernate에 의해 자동 생성되는 로우 쿼리문이 출력됨.

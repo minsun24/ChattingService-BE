@@ -1,6 +1,7 @@
 package com.example.chatserver.member.command.controller;
 
 import com.example.chatserver.common.response.ApiResponse;
+import com.example.chatserver.member.command.dto.LoginRequest;
 import com.example.chatserver.member.command.dto.SignUpRequest;
 import com.example.chatserver.member.command.service.MemberService;
 import com.example.chatserver.member.domain.Member;
@@ -18,7 +19,17 @@ public class MemberController {
 
     @PostMapping("")
     public ResponseEntity<ApiResponse<?>> createMember(@RequestBody SignUpRequest signUpRequest){
-        Member member = memberService.signUp(signUpRequest);
-        return ResponseEntity.ok(ApiResponse.success("회원가입이 완료되었습니다.", member.getId()));
+        Long memberId = memberService.signUp(signUpRequest);
+        return ResponseEntity.ok(ApiResponse.success("회원가입이 완료되었습니다.", memberId));
+    }
+
+    @PostMapping("")
+    public ResponseEntity<ApiResponse<?>> loginMember(@RequestBody LoginRequest loginRequest){
+        
+        // email, password 검증
+        Member member = memberService.login(loginRequest);
+        
+        // 일치할 경우 access token 발행
+        // JWT 의존성 추가 ㅣㄹ요
     }
 }

@@ -28,7 +28,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     // SECURITY는 로그인 개발 후  추가
-//    implementation 'org.springframework.boot:spring-boot-starter-security' 
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     compileOnly 'org.projectlombok:lombok'
@@ -37,6 +37,13 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+//    JWT 0.11 버전 라이브러리 추가
+//    자바에서 JWT(JSON Web Token)를 생성, 서명, 파싱할 수 있도록 도와주는 라이브러리
+//    공식 문서: https://github.com/jwtk/jjwt
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'  // JJWT의 핵심 API (→ JwtBuilder, JwtParser 등의 핵심 기능 제공  )
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'    // → 위 API를 실제로 동작시키는 내부 구현체
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.1105' // Jackson을 사용한 JSON 직렬화/역직렬화 지원
 }
 
 tasks.named('test') {
