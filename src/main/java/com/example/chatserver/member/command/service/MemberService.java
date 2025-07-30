@@ -3,6 +3,7 @@ package com.example.chatserver.member.command.service;
 import com.example.chatserver.common.exception.AuthErrorCode;
 import com.example.chatserver.common.exception.BaseException;
 import com.example.chatserver.member.command.dto.LoginRequest;
+import com.example.chatserver.member.command.dto.MemberListResponse;
 import com.example.chatserver.member.command.dto.SignUpRequest;
 import com.example.chatserver.member.command.repository.MemberRepository;
 import com.example.chatserver.member.domain.Member;
@@ -10,6 +11,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -50,5 +54,19 @@ public class MemberService {
         }
 
         return member;
+    }
+
+    public List<MemberListResponse> findAllMembers() {
+        List<Member> members = memberRepository.findAll();
+        List<MemberListResponse> memberListResponses = new ArrayList<>();
+        for(Member member : members){
+            MemberListResponse memberListResponse = new MemberListResponse();
+            memberListResponse.setId(member.getId());
+            memberListResponse.setName(member.getName());
+            memberListResponse.setEmail(member.getEmail());
+            memberListResponses.add(memberListResponse);
+        }
+
+        return memberListResponses;
     }
 }

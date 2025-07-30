@@ -1,7 +1,9 @@
 package com.example.chatserver.common.response;
 
 import com.example.chatserver.common.exception.ErrorCode;
+import lombok.Getter;
 
+@Getter
 public class ApiResponse<T>{
 
     private String status;  // 클라이언트에게 전달되는 단순화된 결과 코드

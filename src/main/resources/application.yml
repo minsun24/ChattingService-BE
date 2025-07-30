@@ -25,3 +25,14 @@ spring:
 #      ddl-auto: create
       ddl-auto: update # DB 구조 자동 반영 (ex: ALTER)
     show-sql: true    # hibernate에 의해 자동 생성되는 로우 쿼리문이 출력됨.
+
+jwt:
+#  chatserversecretaccesstokenchatserversecretaccesstokenchatserversecretaccesstoken
+#  base64 encoding 에서 Encoding (양방향 암호화)
+  secretKey: ${SECRET_KEY}
+#  토큰 유효 기간
+  expiration: 3000 # 3000분
+
+logging:
+  level:
+    root: INFO
