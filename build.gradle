@@ -43,7 +43,7 @@ dependencies {
 //    공식 문서: https://github.com/jwtk/jjwt
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'  // JJWT의 핵심 API (→ JwtBuilder, JwtParser 등의 핵심 기능 제공  )
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'    // → 위 API를 실제로 동작시키는 내부 구현체
-    implementation 'io.jsonwebtoken:jjwt-jackson:0.1105' // Jackson을 사용한 JSON 직렬화/역직렬화 지원
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // jackson serializer
 }
 
 tasks.named('test') {

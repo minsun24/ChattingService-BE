@@ -37,7 +37,8 @@ public class SecurityConfigs {
 
                 // 특정 URL 패턴에 대해서는 Authentication 객체를 요구하지 않음 (인증 처리 제외)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/member").permitAll()
+//                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/api/members/signup", "/api/members/login").permitAll()
                         .anyRequest().authenticated())  // 그 외 요청은 모두 인증 필요
 
                 // 세션 방식을 사용하지 않겠다.
@@ -51,7 +52,7 @@ public class SecurityConfigs {
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("*"));  // 모든 HTTP 메서드 허용
         configuration.setAllowedHeaders(Arrays.asList("*")); // 모든 헤딩값 허용
         configuration.setAllowCredentials(true);       // 자격 증명 허용
