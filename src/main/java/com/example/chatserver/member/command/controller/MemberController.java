@@ -22,14 +22,6 @@ import java.util.List;
 public class MemberController {
 
     private final MemberService memberService;
-    private final JwtTokenProvider jwtTokenProvider;
-
-    @GetMapping("/health")
-    public ResponseEntity<String> health() {
-        System.out.println("🔥 [Controller] /health 호출됨");
-        log.info("✅ [Controller] /health 호출됨");
-        return ResponseEntity.ok("health");
-    }
 
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse<?>> createMember(@RequestBody SignUpRequest signUpRequest){
@@ -37,29 +29,6 @@ public class MemberController {
         Long memberId = memberService.signUp(signUpRequest);
         log.info("회원가입 완료: memberId={}", memberId);
         return ResponseEntity.ok(ApiResponse.success("회원가입이 완료되었습니다.", memberId));
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<ApiResponse<?>> loginMember(@RequestBody LoginRequest loginRequest){
-
-        log.info("로그인 요청: {}", loginRequest.getEmail());
-        
-        // email, password 검증
-        Member member = memberService.login(loginRequest);
-
-        // 일치할 경우 access token 발행
-        // JWT 의존성 추가 필요
-        String accessToken = jwtTokenProvider.createToken(member.getEmail(), member.getRole().toString());
-        // Refresh token
-
-        LoginResponse response = new LoginResponse(
-                member.getId(),
-                member.getEmail(),
-                accessToken,
-//                refreshToken,
-                member.getRole().toString()
-        );
-        return ResponseEntity.ok(ApiResponse.success("로그인 성공", response));
     }
 
 //    회원 목록 전체 조회
