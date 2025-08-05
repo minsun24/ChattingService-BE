@@ -2,7 +2,6 @@ package com.example.chatserver.common.configs;
 
 import com.example.chatserver.common.auth.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,8 +23,12 @@ public class SecurityConfigs {
 
     private final JwtAuthFilter jwtAuthFilter;
 
+    // 에외 처리 객체 주입
+    private final CustomAuthentication customAuthentication;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+
     @Bean
-    public SecurityFilterChain securityFilter(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilter(HttpSecurity httpSecurity, CustomAuthentication customAuthentication) throws Exception {
         
         // 커스텀한 SecurityFilterChain (스프링 필터)를 반환
         // Spring에서 필터를 싱글톤 객체로 등록되어 사용자 인증 정보 검토
@@ -39,10 +42,17 @@ public class SecurityConfigs {
                 .authorizeHttpRequests(auth -> auth
 //                        .requestMatchers("/**").permitAll()
                         .requestMatchers("/api/members/signup", "/api/members/login").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated())  // 그 외 요청은 모두 인증 필요
 
                 // 세션 방식을 사용하지 않겠다.
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                // 인증 & 인가 예외 처리 등록
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(customAuthentication) // 인증 실패 시
+                        .accessDeniedHandler(customAccessDeniedHandler) // 인가 실패 시
+                )
 
                 // 토큰 검증 : 사용자 요청이 token 을 포함시켜 오면, 해당 필터가 서버에서 만들어진 것인지 검증
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)

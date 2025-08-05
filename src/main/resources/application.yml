@@ -26,6 +26,18 @@ spring:
       ddl-auto: update # DB 구조 자동 반영 (ex: ALTER)
     show-sql: true    # hibernate에 의해 자동 생성되는 로우 쿼리문이 출력됨.
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: jms49526@gmail.com
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 jwt:
 #  chatserversecretaccesstokenchatserversecretaccesstokenchatserversecretaccesstoken
 #  base64 encoding 에서 Encoding (양방향 암호화)

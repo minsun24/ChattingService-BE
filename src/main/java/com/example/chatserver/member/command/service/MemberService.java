@@ -2,6 +2,7 @@ package com.example.chatserver.member.command.service;
 
 import com.example.chatserver.common.exception.AuthErrorCode;
 import com.example.chatserver.common.exception.BaseException;
+import com.example.chatserver.common.exception.MemberErrorCode;
 import com.example.chatserver.member.command.dto.LoginRequest;
 import com.example.chatserver.member.command.dto.MemberListResponse;
 import com.example.chatserver.member.command.dto.SignUpRequest;
@@ -66,7 +67,18 @@ public class MemberService {
             memberListResponse.setEmail(member.getEmail());
             memberListResponses.add(memberListResponse);
         }
+        if(memberListResponses.isEmpty()){
+            throw new BaseException(MemberErrorCode.MEMBER_LIST_EMPTY);
+        }
 
         return memberListResponses;
+    }
+
+    // 가입되어 있는 이메일인지 확인
+    public boolean isExistMember(String email) {
+        if(memberRepository.findByEmail(email).isPresent()){
+            return true;
+        }
+        return false;
     }
 }

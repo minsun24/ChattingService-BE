@@ -62,6 +62,7 @@ public class MemberController {
         return ResponseEntity.ok(ApiResponse.success("로그인 성공", response));
     }
 
+//    회원 목록 전체 조회
     @GetMapping("/list")
     public ResponseEntity<ApiResponse<List<MemberListResponse>>> getMemberList(){
 
