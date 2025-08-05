@@ -11,8 +11,14 @@ public enum AuthErrorCode implements ErrorCode{
 
     EMAIL_ALREADY_EXISTS("A001", "이미 가입된 이메일입니다.", HttpStatus.CONFLICT),
     MEMBER_NOT_FOUND("AUTH_001", "존재하지 않는 이메일입니다.", HttpStatus.UNAUTHORIZED),
-    INVALID_PASSWORD("AUTH_002", "비밀번호가 일치하지 않습니다.", HttpStatus.UNAUTHORIZED)
-    ;
+    INVALID_PASSWORD("AUTH_002", "비밀번호가 일치하지 않습니다.", HttpStatus.UNAUTHORIZED),
+
+    // 이메일 인증 관련
+    INVALID_VERIFICATION_CODE("AUTH_003", "인증 코드가 올바르지 않습니다.", HttpStatus.BAD_REQUEST),
+    EXPIRED_VERIFICATION_CODE("AUTH_004", "인증 코드가 만료되었습니다.", HttpStatus.BAD_REQUEST),
+    TOO_MANY_REQUESTS("A003", "너무 많은 이메일 인증 요청.", HttpStatus.TOO_MANY_REQUESTS);
+
+    
     private final String code;
     private final String message;
     private final HttpStatus httpStatus;
