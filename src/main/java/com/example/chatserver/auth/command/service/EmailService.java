@@ -38,9 +38,9 @@ public class EmailService {
         }
 
         // 인증 코드 이미 존재할 경우, 재요청 차단
-        if (redisTemplate.hasKey(email)) {
-            throw new BaseException(AuthErrorCode.TOO_MANY_REQUESTS);
-        }
+//        if (redisTemplate.hasKey(email)) {
+//            throw new BaseException(AuthErrorCode.TOO_MANY_REQUESTS);
+//        }
 
         // 인증 코드 생성 (6자리 난수)
         String code = String.valueOf((int) (Math.random() * 900000) + 100000);
