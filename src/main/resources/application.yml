@@ -39,7 +39,6 @@ spring:
             enable: true
 
 jwt:
-#  chatserversecretaccesstokenchatserversecretaccesstokenchatserversecretaccesstoken
 #  base64 encoding 에서 Encoding (양방향 암호화)
   secretKey: ${SECRET_KEY}
 #  토큰 유효 기간
