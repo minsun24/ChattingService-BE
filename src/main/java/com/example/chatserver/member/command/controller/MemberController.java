@@ -1,13 +1,9 @@
 package com.example.chatserver.member.command.controller;
 
-import com.example.chatserver.common.auth.JwtTokenProvider;
 import com.example.chatserver.common.response.ApiResponse;
-import com.example.chatserver.member.command.dto.LoginRequest;
-import com.example.chatserver.member.command.dto.LoginResponse;
 import com.example.chatserver.member.command.dto.MemberListResponse;
 import com.example.chatserver.member.command.dto.SignUpRequest;
 import com.example.chatserver.member.command.service.MemberService;
-import com.example.chatserver.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +19,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
+//    회원 가입
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse<?>> createMember(@RequestBody SignUpRequest signUpRequest){
         log.info("회원가입 요청: {}", signUpRequest.getEmail());
@@ -38,6 +35,12 @@ public class MemberController {
         List<MemberListResponse> memberList = memberService.findAllMembers();
         return ResponseEntity.ok(ApiResponse.success("멤버 목록 조회 성공", memberList));
     }
+
+//    TODO. 회원 정보 조회
+
+//    TODO. 회원 정보 수정
+
+//    TODO. 팔로우
 
 
 
