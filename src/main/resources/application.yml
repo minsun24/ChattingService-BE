@@ -26,6 +26,11 @@ spring:
       ddl-auto: update # DB 구조 자동 반영 (ex: ALTER)
     show-sql: true    # hibernate에 의해 자동 생성되는 로우 쿼리문이 출력됨.
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
   mail:
     host: smtp.gmail.com
     port: 587
