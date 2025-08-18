@@ -41,8 +41,7 @@ public class SecurityConfigs {
                 // 특정 URL 패턴에 대해서는 Authentication 객체를 요구하지 않음 (인증 처리 제외)
                 .authorizeHttpRequests(auth -> auth
 //                        .requestMatchers("/**").permitAll()
-                        .requestMatchers("/api/members/signup").permitAll()
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/connect" , "/api/members/signup",  "/api/auth/**").permitAll()
                         .anyRequest().authenticated())  // 그 외 요청은 모두 인증 필요
 
                 // 세션 방식을 사용하지 않겠다.
