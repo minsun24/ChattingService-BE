@@ -1,12 +1,10 @@
 server:
   port: 5000
-
 spring:
   application:
     name: chat-practice
   config:
     import: classpath:secret.properties
-
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
